@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aframeTest</title>
+<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+<!-- <script>require('aframe-extras');</script> -->
+<!-- <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script> -->
+<!-- <script src="https//jesstelford.github.io/aframe-click-drag-component/build.js"></script> -->
+<script type="text/javascript">
+  // Basic example of controlling the loading screen
+  // AFRAME.registerComponent('loading-screen', {
+  //   init: function() {
+  //     const scene = this.el.sceneEl;
+  //     if (scene.hasLoaded) {
+  //       loadingScreen.style.display = 'none'
+  //     }
+  //     scene.addEventListener('realityready', () => {
+  //       loadingScreen.style.display = 'none'
+  //     })
+
+  //     scene.addEventListener('realityerror', () => {
+  //       loadingScreen.textContent = 'An error has occurred.'
+  //     })
+
+  //     scene.addEventListener('camerastatuschange', event => {
+  //       if(event.detail.status == 'failed') {
+  //         loadingScreen.textContent = 'Camera permissions were denied.'
+  //       }
+  //     })
+  //   }
+  // })
+  AFRAME.registerComponent('click-drag',{
+    schema : { speed : {default:1}},
+    init : function(){
+      this.ifMouseDown = false;
+      this.x_cord = 0;
+      this.y_cord = 0;
+      document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+      document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+      document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+    },
+    OnDocumentMouseDown : function(event){
+      this.ifMouseDown = true;
+      this.x_cord = event.clientX;
+      this.y_cord = event.clientY;
+    },
+    OnDocumentMouseUp : function(){
+      this.ifMouseDown = false;
+    },
+    OnDocumentMouseMove : function(event)
+    {
+      if(this.ifMouseDown)
+      {
+        var temp_x = event.clientX-this.x_cord;
+        var temp_y = event.clientY-this.y_cord;
+        if(Math.abs(temp_y)<Math.abs(temp_x))
+        {
+          this.el.object3D.rotateY(temp_x*this.data.speed/1000);
+        }
+        else
+        {
+          this.el.object3D.rotateX(temp_y*this.data.speed/1000);
+        }
+        this.x_cord = event.clientX;
+        this.y_cord = event.clientY;
+      }
+    }
+  });
+</script>
+</head>
+<body style="margin:0px; overflow:hidden;">
+  <!-- 2D overlay UI can be done in HTML -->
+<!--   <div id="overlay"
+       style="position: absolute;
+              left: 0;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              z-index: 5;
+              pointer-events: none;">
+    <div id="loadingScreen"
+         style="position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                text-align: center;
+                font-size: 5vh;
+                background-color: white;
+                padding: 5vh;
+                font-family: sans-serif;
+                pointer-events: auto;">
+      Loading...
+    </div>
+  </div> -->
+  <!-- A-Frame の VR空間に AR.js を紐づける（デバッグUIを非表示） -->
+  <a-scene embedded loading-screen vr-mode-ui="enabled: false" arjs="trackingMethod:best; debugUIEnabled:false;">
+      <a-assets>
+        <a-asset-item id="hoge-obj" src="cake3.obj"></a-asset-item>
+        <a-asset-item id="hoge-mtl" src="cake3.mtl"></a-asset-item>
+      </a-assets>
+
+    <!-- マーカーを登録 -->
+      <a-obj-model
+        click-drag
+        class="cantap"
+        scale=".55 .55 .55"
+        position="0 0 -3"
+        rotation="-15 170 0"
+        src="#hoge-obj"
+        mtl="#hoge-mtl">
+      </a-obj-model>
+
+    <!-- AR用のカメラを置く -->
+    <!-- <a-sky src="Face_04.png" material="" geometry=""></a-sky> -->
+    <!-- AR用のカメラを置く -->
+    <a-entity camera keyboard-controls="fpsMode: true"></a-entity>
+
+  </a-scene>
+</body>
+</html>
