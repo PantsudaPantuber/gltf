@@ -29,10 +29,14 @@
             context.drawImage(capture, 0, 0, width, height);
 
             // jpgに変換してダウンロードさせる
-            var a = document.createElement('a');
-            a.href = snapshot.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
-            a.download = 'aquarium.jpg';
-            a.click();
+            // var a = document.createElement('a');
+            // a.href = snapshot.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
+            // a.download = 'aquarium.jpg';
+            // a.click();
+            var d = snapshot.toDataURL('image/png');
+            d = d.replace('image/png', 'image/octet-stream');
+            d.download   = "sample.png";
+            d.onclick = function() {};
           }
     };
   }
