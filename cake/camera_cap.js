@@ -33,10 +33,34 @@
             // a.href = snapshot.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
             // a.download = 'aquarium.jpg';
             // a.click();
-            var d = snapshot.toDataURL('image/png');
-            d = d.replace('image/png', 'image/octet-stream');
-            d.download   = "sample.png";
-            d.onclick = function() {};
+var imageType = "image/png";
+var fileName = "camera.png";
+var base64 = snapshot.toDataURL(imageType);
+var blob = Base64toBlob(base64);
+saveBlob(blob, fileName);
+function Base64toBlob(base64)
+{
+    var tmp = base64.split(',');
+    var data = atob(tmp[1]);
+    var mime = tmp[0].split(':')[1].split(';')[0];
+    var buf = new Uint8Array(data.length);
+    for (var i = 0; i < data.length; i++) {
+        buf[i] = data.charCodeAt(i);
+    }
+    var blob = new Blob([buf], { type: mime });
+    return blob;
+}
+function saveBlob(blob, fileName)
+{
+    var url = (window.URL || window.webkitURL);
+    var dataUrl = url.createObjectURL(blob);
+    var event = document.createEvent("MouseEvents");
+    event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    var a = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+    a.href = dataUrl;
+    a.download = fileName;
+    a.dispatchEvent(event);
+}
           }
     };
   }
