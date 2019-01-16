@@ -38,8 +38,7 @@ var fileName = "camera.png";
 var base64 = snapshot.toDataURL(imageType);
 var blob = Base64toBlob(base64);
 saveBlob(blob, fileName);
-function Base64toBlob(base64)
-{
+function Base64toBlob(base64){
     var tmp = base64.split(',');
     var data = atob(tmp[1]);
     var mime = tmp[0].split(':')[1].split(';')[0];
@@ -50,8 +49,7 @@ function Base64toBlob(base64)
     var blob = new Blob([buf], { type: mime });
     return blob;
 }
-function saveBlob(blob, fileName)
-{
+function saveBlob(blob, fileName){
     var url = (window.URL || window.webkitURL);
     var dataUrl = url.createObjectURL(blob);
     var event = document.createEvent("MouseEvents");
