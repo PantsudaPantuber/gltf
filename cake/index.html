@@ -8,6 +8,7 @@
 <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
 <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
 <script src="camera_bg.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="camera_cap.js"></script>
 <!-- <script>require('aframe-extras');</script> -->
 <style type="text/css">
@@ -76,7 +77,7 @@
     <!-- AR用のカメラを置く(手動) -->
 
   </a-scene>
-  <a id="capture" href="javascript:void(0);" download><img src="camera-icon.png" alt=""></a>
+  <a id="capture" href="javascript:void(0);" download="html_ss.png"><img src="camera-icon.png" alt=""></a>
   <video id="camera-bg" autoplay muted playsinline style="position: absolute; top: 0; left: 0; z-index: -2;"></video>
 </body>
 </html>
