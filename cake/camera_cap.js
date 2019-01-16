@@ -62,7 +62,7 @@ var base64 = snapshot.toDataURL(imageType);
 html2canvas(document.body,{
     onrendered: function(snapshot){
       var imgData = snapshot.toDataURL();
-      document.getElementById("ss").href = imgData;
+      document.getElementById("capture").href = imgData;
     }
 });
           }
