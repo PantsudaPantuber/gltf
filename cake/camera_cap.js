@@ -58,7 +58,9 @@ function saveBlob(blob, fileName){
     a.href = dataUrl;
     a.download = fileName;
     a.dispatchEvent(event);
-    window.open('data:' + imageType + ';base64,' + window.Base64.encode(blob), '_blank');
+
+    console.log(dataUrl)
+    //window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
           }
     };
