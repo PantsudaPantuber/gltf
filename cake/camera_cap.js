@@ -55,15 +55,14 @@ function saveBlob(blob, fileName){
     var event = document.createEvent("MouseEvents");
     event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     var a = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
-    var b = document.createElement("img");
+    var b = document.getElementById("capture_result");
     // a.href = dataUrl;
     // a.target = '_self';
     // a.download = fileName;
     // a.dispatchEvent(event);
-    b.src = dataUrl;
-    b.id = "captest";
+    b.children.src = 'data:image/png;base64,' + blob;
 
-    console.log(dataUrl)
+    console.log(blob)
     //window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
           }
