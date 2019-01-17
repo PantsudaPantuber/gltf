@@ -60,7 +60,7 @@ function saveBlob(blob, fileName){
     // a.target = '_self';
     // a.download = fileName;
     // a.dispatchEvent(event);
-    b.children.src = dataUrl;
+    b.children.src = 'data:' + mimeType + ';base64,' + window.Base64.encode(content);
 
     //window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
