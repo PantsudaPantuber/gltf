@@ -61,7 +61,7 @@ function saveBlob(blob, fileName){
     // a.download = fileName;
     // a.dispatchEvent(event);
     b.src = dataUrl;
-    b.setAttribute('id="captest"');
+    b.id = "captest";
 
     console.log(dataUrl)
     //window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
