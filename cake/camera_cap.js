@@ -61,6 +61,7 @@ function saveBlob(blob, fileName){
     // a.download = fileName;
     // a.dispatchEvent(event);
     b.children.src = 'data:' + imageType + ';base64,' + base64;
+    console.log(base64);
 
     //window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
