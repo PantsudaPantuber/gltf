@@ -25,7 +25,7 @@
             // A-Frameの映像をsnapshotに描画
             // components.screenshotの大きさを現在のwidthとheightに指定
             scene.setAttribute('screenshot', 'width:' + width + '; height: ' + height + ';');
-            var capture = scene.components.screenshot.getCanvas('perspective');
+            var capture = scene.components.screenshot.capture('perspective');
             context.drawImage(capture, 0, 0, width, height);
 
             // jpgに変換してダウンロードさせる
